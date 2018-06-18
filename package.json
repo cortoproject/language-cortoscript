@@ -1,10 +1,9 @@
 {
-  "name": "language-corto",
+  "name": "language-cortoscript",
   "version": "0.4.0",
-  "description": "Corto language support",
+  "description": "Cortoscript language support",
   "keywords": [
-    "syntax",
-    "theme"
+    "syntax"
   ],
   "repository": "https://github.com/cortoproject/language-cortoscript",
   "license": "MIT",
