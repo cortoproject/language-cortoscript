@@ -1,0 +1,187 @@
+'scopeName': 'source.corto'
+'name': 'Cortoscript'
+'fileTypes': ['corto', 'cx']
+'patterns': [
+  {
+    'include': '#comment'
+  }
+  {
+    'include': '#keywords'
+  }
+  {
+    'include': '#function'
+  }
+  {
+    'include': '#literal'
+  }
+  {
+    'include': '#operator'
+  }
+  {
+    'include': '#variable'
+  }
+  {
+    'include': '#initializer'
+  }
+]
+'repository':
+  'comment':
+    'patterns': [
+      {
+        'begin': '//'
+        'end': '\\n'
+        'name': 'comment.line'
+      }
+      {
+        'begin': '/\\*'
+        'end': '\\*/'
+        'name': 'comment.line'
+      }
+    ]
+
+  'initializer':
+    'patterns': [
+      {
+        'begin': '\\=[ ]+\\{'
+        'end':'}'
+        'patterns': [
+          {
+            'include': '#literal'
+          }
+          {
+            'include': '#keywords'
+          }
+          {
+            'match': '\\b([a-zA-Z_\\.\\/][a-zA-Z0-9_\\.\\/]*):'
+            'captures':
+              '1':
+                'name': 'support.variable'
+          }
+        ]
+      }
+    ]
+
+  'declaration':
+    'patterns': [
+      {
+        'match': '\\b([a-zA-Z_\\.\\/][a-zA-Z0-9_\\.\\/]*\\&?)( )+([a-zA-Z_][a-zA-Z0-9_]*)\\b'
+        'captures':
+          '1':
+            'name': 'storage.type'
+      }
+    ]
+
+  'function':
+    'patterns': [
+      {
+        'begin': '(init|construct|define|validate|update|delete|destruct|deinit)\\('
+        'end': '\\)'
+        'captures':
+          '1':
+            'name': 'support.variable'
+        'patterns': [
+          {
+            'include': '#keywords'
+          }
+        ]
+      }
+      {
+        'begin': '([A-Za-z_][A-Za-z0-9_]*)\\('
+        'end': '\\)'
+        'captures':
+          '1':
+            'name': 'entity.name.function'
+        'patterns': [
+          {
+            'include': '#keywords'
+          }
+          {
+            'include': '#parameter'
+          }
+        ]
+      }
+    ]
+
+  'parameter':
+    'match': '\\b([a-zA-Z_\\.\\/][a-zA-Z0-9_\\.\\/]*\\&?) +([a-zA-Z_][a-zA-Z0-9_]*)\\b'
+    'captures':
+      '1':
+        'name': 'storage.type'
+
+  'variable':
+    'match': '\\b(this)\\b'
+    'name': 'support.variable'
+
+  'literal':
+    'patterns': [
+      {
+        'match': '\\b(0x)?[1-9][0-9]*(\\.[0-9]+)?((e|E)(\\+|-)[0-9]+)?\\b'
+        'name': 'constant.numeric'
+      }
+      {
+        'match': '"(\\"|[^"])*"'
+        'captures':
+          '0':
+            'name': 'string.quoted.double'
+      }
+      {
+        'match': '\'([^\'])*\''
+        'name': 'string.quoted.single'
+      }
+      {
+        'match': '\\b(true|false|and|or|null)\\b'
+        'name': 'constant.other.symbol'
+      }
+    ]
+
+  'keywords':
+    'patterns': [
+      {
+        'match': '\\b(in|out|inout|use|as|typesystem)\\b'
+        'name': 'keyword.control'
+      }
+      {
+        'match': '\\b(object|void|any)\\b'
+        'name': 'support.type.void'
+      }
+      {
+        'match': '\\b(octet|word|bool|char|uint8|uint16|uint32|uint64|int8|int16|int32|int64|float32|float64|string)\\b'
+        'name': 'support.type.primitive'
+      }
+      {
+        'match': '\\b(interface|struct|class|container|leaf|table|target|range)\\b'
+        'name': 'support.class.composite'
+      }
+      {
+        'match': '\\b(collection|array|sequence|list|map)\\b'
+        'name': 'support.class.collection'
+      }
+      {
+        'match': '\\b(function|method|delegate|override|overridable)\\b'
+        'name': 'support.class.procedure'
+      }
+      {
+        'match': '\\b(iterator)\\b'
+        'name': 'support.class.iterator'
+      }
+      {
+        'match': '\\b(bitmask|enum)\\b'
+        'name': 'support.class.constants'
+      }
+      {
+        'match': '\\b(application|package|member|case|default|result)\\b'
+        'name': 'support.type.other'
+      }
+      {
+        'match': '\\b(private|const|readonly|local|global|hidden|key|not_null)\\b'
+        'name': 'support.constant'
+      }
+    ]
+
+  'operator':
+    'patterns': [
+      {
+        'match': '\\:|\\;|\\.|\\/'
+        'name': 'keyword.operator'
+      }
+    ]
