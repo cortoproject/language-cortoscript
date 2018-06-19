@@ -78,7 +78,7 @@
         'end': '\\)'
         'captures':
           '1':
-            'name': 'support.variable'
+            'name': 'support.class.lifecycle_hook'
         'patterns': [
           {
             'include': '#keywords'
@@ -149,7 +149,7 @@
         'name': 'support.type.primitive'
       }
       {
-        'match': '\\b(interface|struct|class|container|leaf|table|target|range)\\b'
+        'match': '\\b(interface|struct|class|container|leaf|table|target|range|procedure)\\b'
         'name': 'support.class.composite'
       }
       {
@@ -157,7 +157,7 @@
         'name': 'support.class.collection'
       }
       {
-        'match': '\\b(function|method|delegate|override|overridable)\\b'
+        'match': '\\b(function|method|delegate|override|overridable|subscriber|observer|mount)\\b'
         'name': 'support.class.procedure'
       }
       {
@@ -169,8 +169,8 @@
         'name': 'support.class.constants'
       }
       {
-        'match': '\\b(application|package|member|case|default|result)\\b'
-        'name': 'support.type.other'
+        'match': '\\b(application|package|member|alias|case|default)\\b'
+        'name': 'support.class.other'
       }
       {
         'match': '\\b(private|const|readonly|local|global|hidden|key|not_null)\\b'
