@@ -42,6 +42,38 @@
       }
     ]
 
+  'initializer-member':
+    'patterns': [
+      {
+        'match': '([^:^,]*):'
+        'captures':
+          '1':
+            'name': 'support.variable'
+      }
+    ]
+
+  'initializer-body':
+    'patterns': [
+      {
+        'begin': '\\{'
+        'end':'}'
+        'patterns': [
+          {
+            'include': '#initializer-member'
+          }
+          {
+            'include': '#literal'
+          }
+          {
+            'include': '#keywords'
+          }
+          {
+            'include': '#initializer-body'
+          }
+        ]
+      }
+    ]
+
   'initializer':
     'patterns': [
       {
@@ -49,16 +81,16 @@
         'end':'}'
         'patterns': [
           {
-            'match': '([^:^,]*):'
-            'captures':
-              '1':
-                'name': 'support.variable'
+            'include': '#initializer-member'
           }
           {
             'include': '#literal'
           }
           {
             'include': '#keywords'
+          }
+          {
+            'include': '#initializer-body'
           }
         ]
       }
@@ -110,6 +142,10 @@
     'patterns': [
       {
         'match': '\\b(0x)?[1-9][0-9]*(\\.[0-9]+)?((e|E)(\\+|-)[0-9]+)?\\b'
+        'name': 'constant.numeric'
+      }
+      {
+        'match': '\\b[0]\\b'
         'name': 'constant.numeric'
       }
       {
